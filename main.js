@@ -120,28 +120,33 @@ function atualizarHoras() {
 async function manipularSubmissaoDoFormulario(evento) {
     evento.preventDefault();
 
-    const id = document.getElementById("pensamento-id")
     const titulo = document.getElementById("agenda-titulo").value;
     const local = document.getElementById("agenda-local").value;
     const data = document.getElementById("agenda-data").value;
 
     if (!validarData(data)) {
-        const mensagemErro = document.querySelector(".mensagem-erro");
-        mensagemErro.style.display = "block"
+        document.querySelector(".mensagem-erro").style.display = "block";
         return;
     }
 
-    const dataFormatada = formatarData(data)
+    const dataFormatada = formatarData(data);
 
     try {
-        await api.postarAgendamentos({ titulo, local, data: dataFormatada })
+        await api.postarAgendamentos({ titulo, local, data: dataFormatada });
+        
+        // Atualiza a lista automaticamente
+        await ui.renderizarAgendamentos();
+
+        // Fecha o formulário e limpa os campos
+        form.classList.remove("mostrar-form");
+        setTimeout(() => form.style.display = "none", 10);
+        form.reset();
 
     } catch (error) {
-        alert("erro ao manipular submissão do formulario")
+        alert("Erro ao adicionar agendamento");
     }
-
-
 }
+
 
 function validarData(data) {
     const dataAtual = new Date();

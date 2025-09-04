@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgendaOn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="container_lista-menu">
+                <li><button type="button" id="botao-novo-agendamento"><img src="assets/escrever_mais.png"
+                            alt=""></button></li>
+                <div>
+                    <li><img class="link-notificacoes" src="assets/bell.png"alt=""></li>
+                    <li class="notificacao-numero"></li>
+                </div>
+            </ul>
+        </nav>
+        <div class="container-notificacoes">
+            <ul class="ul-notificacoes">
+             
+            </ul>
+        </div>
+        <section class="container_dia-da-semana">
+            <img class="imagem-dia-da-semana" src="assets/lua.png" alt="">
+            <p class="relogio"></p>
+            <p class="paragrafo-dia-da-semana"></p>
+        </section>
+
+        
+            <div class="container-agenda">
+                <form id="form-agenda">
+                    <input type="hidden" id="pensamento-id" />
+                    <button type="button" id="botao-fechar"><img src="assets/fechar.png" alt=""></button>
+                    <label for="agenda-titulo">Título</label>
+                    <input type="text" id="agenda-titulo" required>
+                    <label for="agenda-local">Local</label>
+                    <input type="text" id="agenda-local" required>
+                    <label for="agenda-data">Data</label>
+                    <input type="date" id="agenda-data" required>
+                    <p class="mensagem-erro">o agendaOn só recebe datas futuras</p>
+                    <div class="container-botoes-agenda">
+                        <button id="botao-agendar">Agendar</button>
+                        <button type="reset" id="botao-limpar">Limpar</button>
+                    </div>
+                </form>
+            </div>
+
+        <section class="agendamentos">
+            <ul class="ul-agendamentos">
+         
+            </ul>
+
+        </section>
+
+           <div class="container-excluir">
+                <p>Realmente deseja excluir este item ?</p>
+                <button data-acao="excluir" >excluir</button>
+                <button data-acao="cancelar">cancelar</button>           
+            </div>
+        
+
+    </header>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="ui.js"></script>
+</body>
+
+</html>

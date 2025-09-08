@@ -1,15 +1,6 @@
-
 const urlBase = "https://agendaon-backend.onrender.com";
 
-
-if (typeof axios === "undefined") {
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/axios@1.7.5/dist/axios.min.js";
-    document.head.appendChild(script);
-}
-
 const api = {
-
     
     async buscarAgendamentos() {
         try {
@@ -22,18 +13,19 @@ const api = {
         }
     },
 
-    
+   
     async postarAgendamentos(agendamento) {
         try {
-        
-            if (typeof axios === "undefined") throw new Error("Axios não carregado");
-            
-            const response = await axios.post(`${urlBase}/agendamentos`, agendamento, {
+            const response = await fetch(`${urlBase}/agendamentos`, {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json"
-                }
+                },
+                body: JSON.stringify(agendamento)
             });
-            return response.data;
+
+            if (!response.ok) throw new Error("Erro ao adicionar agendamento");
+            return await response.json();
         } catch (error) {
             alert("Erro ao adicionar agendamento");
             throw error;
@@ -46,9 +38,11 @@ const api = {
             const response = await fetch(`${urlBase}/agendamentos/${id}`, {
                 method: "DELETE"
             });
+
             if (!response.ok) throw new Error("Erro ao excluir agendamento");
         } catch (error) {
             alert("Erro ao excluir agendamento");
+            throw error;
         }
     }
 };
